@@ -1,0 +1,28 @@
+* {
+  font-family: "Viaoda Libre", cursive;
+  font-weight: 48px;
+}
+
+#sing-plyr {
+  visibility: hidden;
+}
+
+#mlty-plyr {
+  visibility: hidden;
+}
+
+input {
+  visibility: hidden;
+}
+
+#start1 {
+  visibility: hidden;
+}
+
+#start2 {
+  visibility: hidden;
+}
+
+h3 {
+  visibility: hidden;
+}
