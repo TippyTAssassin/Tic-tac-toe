@@ -1,6 +1,10 @@
 * {
   font-family: "Viaoda Libre", cursive;
-  font-weight: 48px;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
 }
 
 #sing-plyr {
@@ -25,4 +29,32 @@ input {
 
 h3 {
   visibility: hidden;
+}
+section {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: repeat(3, auto);
+}
+#cell {
+  width: 150px;
+  height: 150px;
+  border: 4px solid black;
+  cursor: pointer;
+}
+
+#cell:nth-child(-n + 3) {
+  border-top: none;
+}
+
+#cell:nth-child(3n + 1) {
+  border-left: none;
+}
+
+#cell:nth-child(3n + 3) {
+  border-right: none;
+}
+
+#cell:nth-last-of-type(-n + 3) {
+  border-bottom: none;
 }
