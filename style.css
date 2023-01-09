@@ -7,6 +7,11 @@ h1 {
   justify-content: center;
 }
 
+h2 {
+  display: flex;
+  visibility: hidden;
+}
+
 #sing-plyr {
   visibility: hidden;
 }
@@ -30,11 +35,28 @@ input {
 h3 {
   visibility: hidden;
 }
+i {
+  float: right;
+  font-size: 25px;
+  margin-right: 70px;
+  visibility: hidden;
+}
+#start-button {
+  float: right;
+  margin-right: 50px;
+}
 section {
   display: grid;
   justify-content: center;
   align-content: center;
   grid-template-columns: repeat(3, auto);
+}
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  /* visibility: hidden; */
 }
 #cell {
   width: 150px;
