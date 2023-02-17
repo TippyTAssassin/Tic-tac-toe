@@ -2,8 +2,7 @@
 const state = {
     playerNames:['', ''],
     currentPlayer: '',
-    game: ['','', '', '', '', '', '', '', '',],
-    plyrWin: false,
+    game: ['','', '', '', '', '', '', '', '']
 }
 // DOM SELECTORS
 const restart = document.getElementById('restart-game');
@@ -23,32 +22,68 @@ const section = document.getElementsByTagName('section')[0];
 const winDisp = document.getElementById('winner');
 const board = document.getElementsByTagName('div');
 const boardCells = document.getElementById('cells').children;
-
 // EVENT LISTENERS
 
 //GAME BOARD
-const gameBoard = () => {
+
+const gameBoard = (index) => {
     let boardDiv = document.createElement('div');
     section.appendChild(boardDiv);
-    boardDiv.setAttribute('id', 'cell');
+    boardDiv.setAttribute('id', index);
     boardDiv.addEventListener('click', (clickEvent) => {
+        if(clickEvent.target.innerText !== '') {
+            return
+        }
         const player1 = state.playerNames[0];
         if(player1 === state.currentPlayer) {
             clickEvent.target.innerText = 'X';
-            
+            state.game[clickEvent.target.id] = 'X';
+            checkWin()
+            state.currentPlayer = state.playerNames[1]
         } else {
             clickEvent.target.innerText = 'O';
-        }
-        if(state.currentPlayer === state.playerNames[0]) {
-            state.currentPlayer = state.playerNames[1];
-        } else {
+            state.game[clickEvent.target.id] = 'O';
+            checkWin()
             state.currentPlayer = state.playerNames[0];
         }
     });
+    
+}
+
+const checkWin = () => {
+    const letter = state.currentPlayer === state.playerNames[0] ? 'X' : 'O';
+    if((((((((state.game[0] === letter &&
+        state.game[1] === letter &&
+        state.game[2] === letter) ||
+        state.game[3] === letter &&
+        state.game[4] === letter &&
+        state.game[5] === letter) ||
+        state.game[6] === letter &&
+        state.game[7] === letter &&
+        state.game[8] === letter) ||
+        state.game[0] === letter &&
+        state.game[3] === letter &&
+        state.game[6] === letter) ||
+        state.game[1] === letter &&
+        state.game[4] === letter &&
+        state.game[7] === letter) ||
+        state.game[2] === letter &&
+        state.game[5] === letter &&
+        state.game[8] === letter) ||
+        state.game[0] === letter &&
+        state.game[4] === letter &&
+        state.game[8] === letter) ||
+        state.game[2] === letter &&
+        state.game[4] === letter &&
+        state.game[6] === letter)
+    {
+        winDisp.style.visibility = 'visible';
+        winDisp.innerText = `${player1.value} ${state.currentPlayer} WINS!`;
+    }
 
 }
 
-for(let i = 1; i <= 9; i++) {
+for(let i = 0; i <= 8; i++) {
     gameBoard(i);
 }
 
@@ -130,34 +165,23 @@ restart.addEventListener('click', () => {
     gameStart.disabled = false;
     orderStart.innerText = 'Goes 1st!';
     pickMode.disabled = false;
+    winDisp.innerText = '';
+    board[0].innerText = '';
+    board[1].innerText = '';
+    board[2].innerText = '';
+    board[3].innerText = '';
+    board[4].innerText = '';
+    board[5].innerText = '';
+    board[6].innerText = '';
+    board[7].innerText = '';
+    board[8].innerText = ''; 
+    state.game[0] = '';
+    state.game[1] = '';
+    state.game[2] = '';
+    state.game[3] = '';
+    state.game[4] = '';
+    state.game[5] = '';
+    state.game[6] = '';
+    state.game[7] = '';
+    state.game[8] = '';
 });
-
-
-const horzCombos = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8]
-];
-
-const vertCombos = [
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8]
-];
-
-const diagCombos = [
-    [0, 4, 8],
-    [2, 4, 6]
-];
-
-for(let i = 0; i <= 2; i++) {
-    const innerArrHorz = horzCombos[i];
-if(state.currentPlayer = innerArrHorz[0] || innerArrHorz[1] || innerArrHorz[2]) {
-
-    
-    state.plyrWin = true;
-
-    winDisp.innerText = `${state.currentPlayer} WINS!`;
-}
-
-}
